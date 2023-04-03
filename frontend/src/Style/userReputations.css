@@ -1,0 +1,30 @@
+.user-info{
+  margin-left: 20px; /* set margin-left to the width of the Sidebar component */
+
+}
+.user-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1rem;
+  }
+  
+  .user-grid-cell {
+    padding: 1rem;
+    border: 1px solid #ccc;
+  }
+  .form-group {
+    margin-bottom: 1rem;
+  }
+  
+  .form-question {
+    margin-bottom: 0.5rem;
+  }
+  
+  .form-question label {
+    display: block;
+  }
+  
+  .form-question input[type="checkbox"] {
+    margin-right: 0.5rem;
+  }
+  
