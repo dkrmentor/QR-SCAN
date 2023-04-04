@@ -29,10 +29,10 @@ const App = () => {
       <Routes>
         <Route path="/login" element={<Login />} />
         {isLoggedIn && (
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="/" element={<Navigate to="/" replace />} />
         )}
           {!isLoggedIn ? (
-            <Route path="*" element={<Navigate to="/login" replace />} />
+            <Route path="/" element={<Navigate to="/login" replace />} />
           ) : (
             <>
               <Route path="/" element={<Layout />}>
