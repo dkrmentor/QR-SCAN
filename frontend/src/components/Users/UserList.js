@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 const UserList = () => {
+
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
 

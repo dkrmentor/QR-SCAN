@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { postRegister } from "../../api";
 import "../../assets/Style/addUser.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import LoadingSpinner from "../common/loading_spinner";
 
 const AddUser = () => {
 
@@ -8,6 +11,8 @@ const AddUser = () => {
     const [username, setUsername] = useState("");
     const [roleId, setRoleId] = useState("");
     const [password, setPassword] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
+
 
     const handleEmailChange = (event) => {
         setEmail(event.target.value);
@@ -26,17 +31,22 @@ const AddUser = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
+        setIsLoading(true);
+      
         await postRegister(username, email, password, roleId).then((response) => {
+            toast.success("User Added",{autoClose: 2000,});
             console.log(response);
+            setIsLoading(false);
         }).catch((error) => {
+            toast.error("Failed To Create",{autoClose: 2000,});
+            setIsLoading(false);
             console.log(error);
         });
     };
 
     return (
         <div className="add-user">
-            <form onSubmit={handleSubmit}>
+            <form >
                 <label for="username">Username:</label><br></br>
                 <input type="text" value={username} id="username" name="username" onChange={handleUserNameChange} /><br></br>
                 <label for="email">Email:</label><br></br>
@@ -48,8 +58,11 @@ const AddUser = () => {
                 </select><br></br>
                 <label for="password">Password:</label><br></br>
                 <input type="text" value={password} id="password" name="password" onChange={handlePasswordChange} /><br></br>
-                <input type="submit" value="Submit"></input>
+                {/* <input type="submit" value= {isLoading ? <LoadingSpinner /> :  "Submit"}></input> */}
             </form>
+            <button className="button" onClick={handleSubmit} disabled={isLoading}> {isLoading ? <LoadingSpinner /> : "Submit"}</button >
+            
+            <ToastContainer />
         </div>
     );
 }

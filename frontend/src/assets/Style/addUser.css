@@ -102,3 +102,36 @@
 .add-user input[type="submit"]:hover {
   background-color: #05a;
 }
+
+button {
+  background-color: rgb(79, 129, 238); /* Green */
+  border: none;
+  position: relative;
+  color: white;
+  padding: 18px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 100%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+button:focus {
+  outline: none;
+}
+
+.spinner {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 10px; /* Adjust this value to increase/decrease the space between the spinner and the button text */
+  width: 20px;
+  height: 20px;
+
+}
