@@ -37,7 +37,7 @@ const Login = () => {
         
         setTimeout(() => {
           console.log(isLoggedIn)
-          navigate('/dashboard', { replace: true });
+          navigate('/', { replace: true });
         }, 2000);
 
       } else {

@@ -27,47 +27,28 @@ const App = () => {
     <Router>
     <AuthContext.Provider value={{ isLoggedIn, handleLogin, handleLogout }}>
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
         {isLoggedIn && (
-          <Route path="*" element={<Navigate to="/dashboard" replace />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         )}
-        <Route path="/" element={<Layout />}>
           {!isLoggedIn ? (
-            <Route path="/" element={<Navigate to="/" replace />} />
+            <Route path="*" element={<Navigate to="/login" replace />} />
           ) : (
             <>
+              <Route path="/" element={<Layout />}>
+              <Route path="/" element={<Dashboard />} />
               <Route path="/addUser" element={<AddUser />} />
               <Route path="/users" element={<UserList />} />
-              <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/notifications" element={<UserNotification />} />
               <Route path="/users/reputation" element={<UserReputation />} />
+              </Route>
+
             </>
           )}
-        </Route>
       </Routes>
     </AuthContext.Provider>
   </Router>
-    // <Router>
-    //   <AuthContext.Provider value={{ isLoggedIn, handleLogin, handleLogout }}>
-    //     <Routes>
-    //       <Route path="/" element={<Login />} />
-    //       <Route path="/" element={<Layout />}>
-    //         {isLoggedIn ? (
-    //           <>
-    //             <Route path="/addUser" element={ <AddUser />} />
-    //             <Route path="/users" element={ <UserList />} />
-    //             <Route path="/dashboard" element={<Dashboard />} />
-    //             <Route path="/notifications" element={<UserNotification />} />
-    //             <Route path="/users/reputation" element={<UserReputation />} />
-    //           </>
-    //         ) : (
-    //           <Route path="/" element={<Login />} />
-    //         )}
-    //         <Route path="*" element={<Navigate to="/" replace />} />
-    //       </Route>
-    //     </Routes>
-    //   </AuthContext.Provider>
-    // </Router>
+
 
   );
 
