@@ -4,9 +4,12 @@ const connection = require('./config/sql_config.js');
 const util = require('util');
 const cors = require('cors');
 const crypto = require('crypto');
+const bodyParser = require('body-parser');
 
+app.use(bodyParser.urlencoded({ extended: false }));//Its use for mobile app data
+app.use(bodyParser.json());
 app.use(express.json());
-app.use(cors());
+app.use(cors());// Its use for web app data
 
 var dbQuery;
 
@@ -78,8 +81,9 @@ app.post('/login', async (req, res) => {
 
     const email = req.body['email'];
     const password = req.body.password;
-
+    
     var user = await dbQuery('SELECT * FROM user WHERE email = ? AND password = ?', [email, password]);
+
     if (user.length > 0) {
         res.status(200).json({ "stauts": "success", "data": user });
     } else {
@@ -132,8 +136,8 @@ app.post('/form', async (req, res) => {
     const language = req.body['user_language'];
     const observations = req.body['observations'];
     const location = req.body['location'];
-    const lat = req.body['lat'];
-    const long = req.body['long'];
+    const lat = req.body['user_lat'];
+    const long = req.body['user_long'];
 
     var reputation = await dbQuery('INSERT INTO user_reputation (name,first_name,site,controller,date,time,identity_card,round_controller,cleanliness_workstation,storage_documents,electronic_paperhandrail,round_reports,dress_code,onsite_behaviour,punctuality,reactivity,observations,user_position,user_language,location,user_lat,user_long,create_time) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,CURRENT_TIMESTAMP)', [name, firstName, site, controller, date, time, identityCard, roundController, cleanlinessOfTheWorkstation, storageOfMaterialsAndDocuments, electronicAndOrPaperHandrail, roundReports, dressCode, onSiteBehaviour, punctuality, reactivity, observations, position, language, location, lat, long]);
 
@@ -141,8 +145,6 @@ app.post('/form', async (req, res) => {
 
     res.status(200).json({ "stauts": "success", "data": reputationData });
 
-
-    
 });
 
 
@@ -150,8 +152,12 @@ app.post('/notification', async (req, res) => {
 
     const address = req.body['address'];
     const userId = req.body['user_id'];
+    const lat = req.body['user_lat'];
+    const long = req.body['user_long'];
 
-    var notification = await dbQuery('INSERT INTO notifications (current_location,user_id,create_time) VALUES (?,?,CURRENT_TIMESTAMP)', [address, userId]);
+
+
+    var notification = await dbQuery('INSERT INTO notifications (current_location,user_id,create_time,user_lat,user_long) VALUES (?,?,CURRENT_TIMESTAMP,?,?)', [address, userId,lat,long]);
 
     res.status(200).json({ "stauts": "success", "data": notification });
 

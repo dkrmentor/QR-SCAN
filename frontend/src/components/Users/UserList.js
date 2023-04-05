@@ -33,6 +33,7 @@ const UserList = () => {
   };
 
   const handleSortOrderChange = () => {
+    
     setSortOrder((sortOrder) => {
       if (sortOrder === "asc") {
         return "desc";

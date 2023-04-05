@@ -24,9 +24,6 @@ const Login = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    console.log(isLoggedIn)
-    console.log("works")
-
     try {
       const user = await postLogin(email, password);
 
@@ -36,7 +33,6 @@ const Login = () => {
         handleLogin(true);
         
         setTimeout(() => {
-          console.log(isLoggedIn)
           navigate('/', { replace: true });
         }, 2000);
 
