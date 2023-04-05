@@ -1,4 +1,4 @@
-import React, { createContext, useState, Fragment } from "react";
+import React, { createContext, useState, useEffect  } from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import UserList from "./components/Users/UserList";
 import UserReputation from "./components/Users/UserReputation";
@@ -13,7 +13,11 @@ import UserNotification from "./components/Users/UserNotification";
 export const AuthContext = createContext();
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn') || false);
+
+  useEffect(() => {
+    localStorage.setItem('isLoggedIn', isLoggedIn);
+  }, [isLoggedIn]);
 
   const handleLogin = (val) => {
     setIsLoggedIn(val);
@@ -27,9 +31,9 @@ const App = () => {
     <Router>
     <AuthContext.Provider value={{ isLoggedIn, handleLogin, handleLogout }}>
       <Routes>
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={isLoggedIn ? <Navigate to="/" replace /> : <Login handleLogin={handleLogin} />} />
         {isLoggedIn && (
-          <Route path="/" element={<Navigate to="/" replace />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         )}
           {!isLoggedIn ? (
             <Route path="/" element={<Navigate to="/login" replace />} />
@@ -48,8 +52,6 @@ const App = () => {
       </Routes>
     </AuthContext.Provider>
   </Router>
-
-
   );
 
  
