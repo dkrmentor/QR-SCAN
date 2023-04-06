@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../App";
 import { useNavigate } from "react-router-dom";
-// import "../../assets/Style/logout.css";
+import "../../assets/Style/logout.css";
 
 const Logout = () => {
   const { handleLogout } = useContext(AuthContext);
