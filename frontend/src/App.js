@@ -17,7 +17,7 @@ const App = () => {
 
   // useEffect(() => {
   //   localStorage.setItem('isLoggedIn', isLoggedIn);
-  // }, [isLoggedIn]);
+  // }, [isLoggedIn]); So I change the login 
 
   const handleLogin = (val) => {
     setIsLoggedIn(val);
