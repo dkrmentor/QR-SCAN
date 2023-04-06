@@ -36,7 +36,7 @@ const App = () => {
           <Route path="*" element={<Navigate to="/" replace />} />
         )}
           {!isLoggedIn ? (
-            <Route path="/" element={<Navigate to="/login" replace />} />
+            <Route path="*" element={<Navigate to="/login" replace />} />
           ) : (
             <>
               <Route path="/" element={<Layout />}>
