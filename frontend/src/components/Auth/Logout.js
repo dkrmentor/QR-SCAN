@@ -9,9 +9,10 @@ const Logout = () => {
 
   const handleClick = () => {
     handleLogout(false);
-    localStorage.removeItem('isLoggedIn');
-    navigate("/login");
+    localStorage.clear();
+    navigate("/login", { replace: true });
   }
+
 
   return (
     <div className="logout">

@@ -30,6 +30,7 @@ const Login = () => {
       if (user && user[0].role_id === 1) {
 
         toast.success("Login Successful", { autoClose: 2000, });
+        localStorage.setItem('isLoggedIn', true);
         handleLogin(true);
         
         setTimeout(() => {

@@ -15,9 +15,9 @@ export const AuthContext = createContext();
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn') || false);
 
-  useEffect(() => {
-    localStorage.setItem('isLoggedIn', isLoggedIn);
-  }, [isLoggedIn]);
+  // useEffect(() => {
+  //   localStorage.setItem('isLoggedIn', isLoggedIn);
+  // }, [isLoggedIn]);
 
   const handleLogin = (val) => {
     setIsLoggedIn(val);
