@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+
 import { AuthContext } from "../../App";
 import { useNavigate } from "react-router-dom";
 import "../../assets/Style/logout.css";
@@ -9,7 +10,7 @@ const Logout = () => {
 
   const handleClick = () => {
     handleLogout(false);
-    localStorage.removeItem('isLoggedIn');
+    localStorage.clear();
     navigate("/login");
   }
 
