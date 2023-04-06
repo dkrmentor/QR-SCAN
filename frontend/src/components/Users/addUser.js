@@ -9,7 +9,7 @@ const AddUser = () => {
 
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
-    const [roleId, setRoleId] = useState("");
+    const [roleId, setRoleId] = useState("1");
     const [password, setPassword] = useState("");
     const [isLoading, setIsLoading] = useState(false);
 
@@ -31,17 +31,35 @@ const AddUser = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        setIsLoading(true);
-      
-        await postRegister(username, email, password, roleId).then((response) => {
-            toast.success("User Added",{autoClose: 2000,});
-            console.log(response);
-            setIsLoading(false);
-        }).catch((error) => {
-            toast.error("Failed To Create",{autoClose: 2000,});
-            setIsLoading(false);
-            console.log(error);
-        });
+        console.log("username", username);
+        if (username === "" || username === null) {
+        
+            toast.error("Username Required", { autoClose: 2000, });
+            return;
+        } else {
+            if (email === "") {
+                toast.error("Email Required", { autoClose: 2000, });
+                return;
+            } else {
+                if (password === "") {
+                    toast.error("Password Required", { autoClose: 2000, });
+                    return;
+                } else {
+
+                    setIsLoading(true);
+
+                    await postRegister(username, email, password, roleId).then((response) => {
+                        toast.success("User Added", { autoClose: 2000, });
+                        console.log(response);
+                        setIsLoading(false);
+                    }).catch((error) => {
+                        toast.error("Failed To Create", { autoClose: 2000, });
+                        setIsLoading(false);
+                        console.log(error);
+                    });
+                }
+            }
+        }
     };
 
     return (
@@ -61,7 +79,7 @@ const AddUser = () => {
                 {/* <input type="submit" value= {isLoading ? <LoadingSpinner /> :  "Submit"}></input> */}
             </form>
             <button className="button" onClick={handleSubmit} disabled={isLoading}> {isLoading ? <LoadingSpinner /> : "Submit"}</button >
-            
+
             <ToastContainer />
         </div>
     );
