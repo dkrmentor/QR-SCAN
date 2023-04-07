@@ -32,7 +32,6 @@ const InputValidation = ({ value, name, label, type, required, minLength, maxLen
         }
     };
 
-
     return (
         <>
             <label htmlFor={name}>{label}:</label><br />

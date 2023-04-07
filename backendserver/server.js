@@ -75,13 +75,31 @@ app.get('/user_reputation', async (req, res) => {
     } else {
         res.status(401).json({ "stauts": "failed", "message": "Invalid user" });
     }
+
 });
+
+app.get('/user_reputation/:id', async (req, res) => {
+
+    const userId = req.user.id;
+
+    var reputation = await dbQuery('SELECT * FROM user_reputation WHERE user_id = ?', [userId]);
+
+    if (reputation.length > 0) {
+        res.status(200).json({ "stauts": "success", "data": reputation });
+    } else {
+        res.status(401).json({ "stauts": "failed", "message": "Invalid user" });
+    }
+
+});
+
+
+
 
 app.post('/login', async (req, res) => {
 
     const email = req.body['email'];
     const password = req.body.password;
-    
+
     var user = await dbQuery('SELECT * FROM user WHERE email = ? AND password = ?', [email, password]);
 
     if (user.length > 0) {
@@ -139,7 +157,7 @@ app.post('/form', async (req, res) => {
     const lat = req.body['user_lat'];
     const long = req.body['user_long'];
 
-    var reputation = await dbQuery('INSERT INTO user_reputation (name,first_name,site,controller,date,time,identity_card,round_controller,cleanliness_workstation,storage_documents,electronic_paperhandrail,round_reports,dress_code,onsite_behaviour,punctuality,reactivity,observations,user_position,user_language,location,user_lat,user_long,create_time) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,CURRENT_TIMESTAMP)', [name, firstName, site, controller, date, time, identityCard, roundController, cleanlinessOfTheWorkstation, storageOfMaterialsAndDocuments, electronicAndOrPaperHandrail, roundReports, dressCode, onSiteBehaviour, punctuality, reactivity, observations, position, language, location, lat, long]);
+    var reputation = await dbQuery('INSERT INTO user_reputation (name,first_name,site,controller,date,time,identity_card,round_controller,cleanliness_workstation,storage_documents,electronic_paperhandrail,round_reports,dress_code,onsite_behaviour,punctuality,reactivity,observations,user_position,user_language,location,user_lat,user_long,create_time,user_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,CURRENT_TIMESTAMP,?)', [name, firstName, site, controller, date, time, identityCard, roundController, cleanlinessOfTheWorkstation, storageOfMaterialsAndDocuments, electronicAndOrPaperHandrail, roundReports, dressCode, onSiteBehaviour, punctuality, reactivity, observations, position, language, location, lat, long, req.user.id]);
 
     var reputationData = await dbQuery('SELECT * FROM user_reputation WHERE id = ?', reputation.insertId);
 
@@ -157,7 +175,7 @@ app.post('/notification', async (req, res) => {
 
 
 
-    var notification = await dbQuery('INSERT INTO notifications (current_location,user_id,create_time,user_lat,user_long) VALUES (?,?,CURRENT_TIMESTAMP,?,?)', [address, userId,lat,long]);
+    var notification = await dbQuery('INSERT INTO notifications (current_location,user_id,create_time,user_lat,user_long) VALUES (?,?,CURRENT_TIMESTAMP,?,?)', [address, userId, lat, long]);
 
     res.status(200).json({ "stauts": "success", "data": notification });
 
