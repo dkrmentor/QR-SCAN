@@ -9,7 +9,7 @@ import {
   faArrowUp,
   faArrowDown,
 } from "@fortawesome/free-solid-svg-icons";
-const UserList = () => {
+ const UserList = () => {
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
   const [sortOrder, setSortOrder] = useState("asc");
@@ -60,7 +60,7 @@ const UserList = () => {
               className="user-list-cell fname"
               onClick={handleSortOrderChange}
             >
-              Firstname{"  "}
+              Prénom{"  "}
               <span className="arrow-icons">
               <FontAwesomeIcon
                 className={`arrow-icon ${
@@ -83,7 +83,7 @@ const UserList = () => {
             </div>
             <div className="user-list-cell position">Position</div>
             <div className="user-list-cell site">Site</div>
-            <div className="user-list-cell card">Card</div>
+            <div className="user-list-cell card">Carte</div>
           </div>
           {sortedUsers.map((user) => (
             <div

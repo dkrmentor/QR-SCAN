@@ -3,7 +3,6 @@ import "../../assets/Style/userReputations.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
-import profile from "../../assets/Images/profile.png";
 import { GoogleMaps } from "../common/GoogleMaps";
 import { Question } from "../common/Question";
 
@@ -32,11 +31,11 @@ const UserReputation = ({ user }) => {
         <div className="user">
           <div className="user-cell profile-identity">
             <div className="user-profile">
-              <div className="user-list-cell">
-                <img src={profile} alt="Profile" />
-              </div>
+              {/* <div className="user-list-cell">
+                <img src={profile} alt="Profil" />
+              </div> */}
               <div className="user-identity">
-                <p>{user.name}</p>
+              <h1 style={{textTransform: 'capitalize'}}>{user.name}</h1>
                 <div className="user-card">
                   <div className="user-icon">
                     {user.identity_card === "yes" ? (
@@ -46,7 +45,7 @@ const UserReputation = ({ user }) => {
                     )}
                   </div>
                   <p className="identity-info">
-                    Professional Card and Identity Card
+                    Carte professionnelle et carte d'identité
                   </p>
                 </div>
               </div>
@@ -54,14 +53,14 @@ const UserReputation = ({ user }) => {
           </div>
           <div className="profile-info">
             <div className="user-cell ">
-              <p>First Name: {user.first_name}</p>
-              <p>Position: {user.user_position}</p>
-              <p>Site: {user.site}</p>
+              <p> <span> Prénom: </span> {user.first_name}</p>
+              <p> <span> Position: </span> {user.user_position}</p>
+              <p> <span> Site: </span> {user.site}</p>
             </div>
             <div className="user-cell ">
-              <p>Controller: {user.controller}</p>
-              <p>Date: {user.date}</p>
-              <p>Time: {user.time}</p>
+              <p> <span> Contrôleur: </span> {user.controller}</p>
+              <p> <span> Date: </span> {user.date}</p>
+              <p> <span> Heure: </span> {user.time}</p>
             </div>
           </div>
         </div>
@@ -69,23 +68,23 @@ const UserReputation = ({ user }) => {
       <div className="user-question">
         <div className="condition-questions">
           <div className="condition-equipment">
-            <h2 className="question-heading">Condition of the Equipment</h2>
+            <h2 className="question-heading">État de l'équipement</h2>
             <Question
-              label="1. Round controller"
+              label="1. Contrôleur de ronde"
               value={roundController}
               onChange={setRoundController}
             />
           </div>
           <div className="condition-Workstation">
-            <h2 className="question-heading">Condition of the Workstation</h2>
+            <h2 className="question-heading">État de la station de travail</h2>
             <div className="cleanlinessandstorage">
               <Question
-                label="1. Cleanliness of the workstation"
+                label="1. Propreté de la station de travail"
                 value={cleanlinessWorkstation}
                 onChange={setCleanlinessWorkstation}
               />
               <Question
-                label="2. Storage of materials and documents"
+                label="2. Stockage des matériaux et des documents"
                 value={storageDocuments}
                 onChange={setStorageDocuments}
               />
@@ -93,31 +92,31 @@ const UserReputation = ({ user }) => {
           </div>
         </div>
         <div className="performance-questions">
-          <h2 className="question-heading">Attitudes, Performance & Attire</h2>
+          <h2 className="question-heading">Attitudes, performance et tenue</h2>
 
           <div className="attitudes-performance-attire">
             <Question
-              label="1. Dress code"
+              label="1. Tenue vestimentaire"
               value={dressCode}
               onChange={setDressCode}
             />
             <Question
-              label="2. On-site behavior"
+              label="2. Comportement sur site"
               value={onsiteBehaviour}
               onChange={setOnsiteBehaviour}
             />
             <Question
-              label="3. Punctuality (start and end of service)"
+              label="3. Ponctualité (début et fin de service)"
               value={punctuality}
               onChange={setPunctuality}
             />
             <Question
-              label="4. Reactivity"
+              label="4. Réactivité"
               value={reactivity}
               onChange={setReactivity}
             />
             <Question
-              label="5. Language"
+              label="5. Langue"
               value={userLanguage}
               onChange={setUserLanguage}
             />
@@ -125,16 +124,16 @@ const UserReputation = ({ user }) => {
         </div>
         <div className="operational-questions">
           <div className="Operating-documents">
-            <h2 className="question-heading">Operating documents</h2>
+            <h2 className="question-heading">Documents d'exploitation</h2>
 
             <div className="electronicandreport">
               <Question
-                label="1. Electronic and/or paper handrail"
+                label="1. Rampe électronique et/ou papier"
                 value={electronicPaperhandrail}
                 onChange={setElectronicPaperhandrail}
               />
               <Question
-                label="2. Round reports"
+                label="2. Rapports de ronde"
                 value={roundReports}
                 onChange={setRoundReports}
               />
@@ -147,7 +146,7 @@ const UserReputation = ({ user }) => {
         </div>
         <div className="observation">
           <h2 className="question-heading">Observation</h2>
-          <p>user.observations: {user.observations}</p>
+          <p>Observations de l'utilisateur: {user.observations}</p>
         </div>
       </div>
     </div>
@@ -155,5 +154,3 @@ const UserReputation = ({ user }) => {
 };
 
 export default UserReputation;
-
-
