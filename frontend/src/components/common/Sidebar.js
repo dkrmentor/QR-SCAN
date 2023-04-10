@@ -33,7 +33,7 @@ function Sidebar() {
             <li onClick={handleClick} className='nav-menu-items'>
 
               <FontAwesomeIcon icon={faUsers} />
-              <span>Users</span>
+              <span>Utilisateurs</span>
 
             </li>
           </ul>
@@ -43,9 +43,8 @@ function Sidebar() {
             <li onClick={handleClickAddUser} className='nav-menu-items'>
               {/* <a href="/addUser"> */}
                 <FontAwesomeIcon icon={faUsers} />
-                <span>AddUsers</span>
-              {/* </a> */}
-            </li>
+                <span>Ajouter un utilisateur</span>
+                 </li>
           </ul>
         </div>
       </nav>

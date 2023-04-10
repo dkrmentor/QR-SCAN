@@ -2,12 +2,12 @@ import React, { useContext, useState } from "react";
 import { postLogin } from "../../api";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../App";
-import "../../assets/Style/login.css"
+import "../../assets/Style/login.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
-  const { isLoggedIn, handleLogin } = useContext(AuthContext);
+  const { handleLogin } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -29,7 +29,7 @@ const Login = () => {
 
       if (user && user[0].role_id === 1) {
 
-        toast.success("Login Successful", { autoClose: 2000, });
+        toast.success("Connexion réussie", { autoClose: 2000, });
         localStorage.setItem('isLoggedIn', true); 
         handleLogin(true);
         
@@ -38,12 +38,12 @@ const Login = () => {
         }, 2000);
 
       } else {
-        toast.error("Invalid Credentials", { autoClose: 2000, });
-        setError("Invalid email or password");
+        toast.error("Informations de connexion invalides", { autoClose: 2000, });
+        setError("Adresse email ou mot de passe invalide");
       }
     } catch (error) {
-      toast.error("Something went wrong", { autoClose: 2000, });
-      setError("Something went wrong. Please try again later.");
+      toast.error("Une erreur est survenue", { autoClose: 2000, });
+      setError("Une erreur est survenue, veuillez réessayer plus tard");
     }
   };
 
@@ -52,7 +52,7 @@ const Login = () => {
     <div className="login-page">
       <form className="login-page__form" >
 
-        <h1 className="login-page__title">Login</h1>
+        <h1 className="login-page__title">Connexion</h1>
 
         <label className="login-page__label">
           Email:
@@ -66,7 +66,7 @@ const Login = () => {
         </label>
         <br />
         <label className="login-page__label">
-          Password:
+          Mot de passe:
           <input
             className="login-page__input"
             type="password"
@@ -77,7 +77,7 @@ const Login = () => {
         </label>
         <br />
         <button onClick={handleSubmit} className="login-page__button" type="submit">
-          Login
+          Connexion
         </button>
         <ToastContainer />
       </form>
@@ -86,6 +86,5 @@ const Login = () => {
 
   );
 };
-
 
 export default Login;
