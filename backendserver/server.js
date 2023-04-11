@@ -106,9 +106,9 @@ app.post('/login', async (req, res) => {
     const password = req.body.password;
 
     var user = await dbQuery('SELECT * FROM user WHERE email = ? AND password = ?', [email, password]);
-
     if (user.length > 0) {
-        res.status(200).json({ "stauts": "success", "data": user });
+        const { password, ...userWithoutPassword } = user[0];
+        res.status(200).json({ "stauts": "success", "data": userWithoutPassword });
     } else {
         res.status(401).json({ "stauts": "failed", "message": "Invalid credentials" });
     }
@@ -118,7 +118,7 @@ app.post('/register', async (req, res) => {
 
     const email = req.body['email'];
     const username = req.body['username'];
-    const password = req.body.password;
+    const pass = req.body.password;
     const role = req.body["role_id"];
 
 
@@ -130,9 +130,9 @@ app.post('/register', async (req, res) => {
 
         var authKey = await generateAuthKey();
         authKey = 'Bearer ' + authKey;
-        var users = await dbQuery('INSERT INTO user (email,name,password,role_id,auth_key,create_time) VALUES (?,?,?,?,?,CURRENT_TIMESTAMP)', [email, username, password, role, authKey]);
-
-        res.status(200).json({ "stauts": "success", "data": users });
+        var users = await dbQuery('INSERT INTO user (email,name,password,role_id,auth_key,create_time) VALUES (?,?,?,?,?,CURRENT_TIMESTAMP)', [email, username, pass, role, authKey]);
+        const { password, ...userWithoutPassword } = user[0];
+        res.status(200).json({ "stauts": "success", "data": userWithoutPassword });
     }
 });
 
