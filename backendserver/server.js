@@ -121,13 +121,11 @@ app.post('/register', async (req, res) => {
     const pass = req.body.password;
     const role = req.body["role_id"];
 
-
     var user = await dbQuery('SELECT * FROM user WHERE email = ?', [email]);
 
     if (user.length > 0) {
         res.status(200).json({ "stauts": "failed", "message": "User Already exists" });
     } else {
-
         var authKey = await generateAuthKey();
         authKey = 'Bearer ' + authKey;
         var users = await dbQuery('INSERT INTO user (email,name,password,role_id,auth_key,create_time) VALUES (?,?,?,?,?,CURRENT_TIMESTAMP)', [email, username, pass, role, authKey]);
