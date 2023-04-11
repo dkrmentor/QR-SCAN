@@ -5,11 +5,19 @@ const util = require('util');
 const cors = require('cors');
 const crypto = require('crypto');
 const bodyParser = require('body-parser');
+const auth = require('./api/auth.js');
+const users = require('./api/users.js');
 
 app.use(bodyParser.urlencoded({ extended: false }));//Its use for mobile app data
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(cors());// Its use for web app data
+
+//--------------------------------- Middleware for router
+app.use('/api', auth);
+app.use('/api', users);//just like that we have to make notification also
+
+//--------------------------------- Middleware for router
 
 var dbQuery;
 
@@ -32,7 +40,7 @@ async function generateAuthKey() {
 }
 
 const Authorization = async function (req, res, next) {
-    if (req.originalUrl === "/login" || req.originalUrl === "/register") {
+    if (req.originalUrl === "/api/login" || req.originalUrl === "/api/register" || req.originalUrl === "/login" || req.originalUrl === "/register") {
         next();
         return;
     }
@@ -91,9 +99,6 @@ app.get('/user_reputation/:id', async (req, res) => {
     }
 
 });
-
-
-
 
 app.post('/login', async (req, res) => {
 
@@ -172,8 +177,6 @@ app.post('/notification', async (req, res) => {
     const userId = req.body['user_id'];
     const lat = req.body['user_lat'];
     const long = req.body['user_long'];
-
-
 
     var notification = await dbQuery('INSERT INTO notifications (current_location,user_id,create_time,user_lat,user_long) VALUES (?,?,CURRENT_TIMESTAMP,?,?)', [address, userId, lat, long]);
 
