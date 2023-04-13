@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect  } from "react";
+import React, { createContext, useState  } from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import UserList from "./components/Users/UserList";
 import UserReputation from "./components/Users/UserReputation";

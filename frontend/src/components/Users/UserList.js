@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getUsers } from "../../api";
 import UserReputation from "./UserReputation";
-import "../../assets/Style/userlist.css";
+import "../../assets/Style/listing.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCheck,
