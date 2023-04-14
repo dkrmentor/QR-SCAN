@@ -27,7 +27,7 @@ const Login = () => {
     try {
       const user = await postLogin(email, password);
 
-      if (user && (user.role_id === 1 || user.role_id === 3)) {
+      if (user && (user.role_id === '1' || user.role_id === '3')) {
 
         toast.success("Connexion réussie", { autoClose: 2000, });
         localStorage.setItem('isLoggedIn', true); 

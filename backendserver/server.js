@@ -233,7 +233,7 @@ app.get('/getnotification', async (req, res) => {
     }
 
 });
-
-app.listen(4000, () => {
-    console.log('Server listening on port 3000');
+$PORT = 4000;
+app.listen($PORT, () => {
+    console.log('Server listening on port '+$PORT);
 }); 

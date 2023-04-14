@@ -1,6 +1,7 @@
 import React, { createContext, useState  } from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import UserList from "./components/Users/UserList";
+import AdminList from "./components/Users/AdminList";
 import UserReputation from "./components/Users/UserReputation";
 import Dashboard from "./components/Dashboard.js";
 import Login from "./components/Auth/Login";
@@ -39,6 +40,7 @@ const App = () => {
               <Route path="/" element={<Dashboard />} />
               <Route path="/addUser" element={<AddUser />} />
               <Route path="/users" element={<UserList />} />
+              <Route path="/admins" element={<AdminList />} />
               <Route path="/notifications" element={<UserNotification />} />
               <Route path="/users/reputation" element={<UserReputation />} />
               </Route>

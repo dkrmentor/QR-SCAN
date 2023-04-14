@@ -1,12 +1,13 @@
 import axios from "axios";
 
-const BASE_URL = "http://192.168.0.136:4000";
+const BASE_URL = "http://192.168.1.113:4000";
 
 export const postLogin = async (email, password) => {
   try {
     const response = await axios.post(`${BASE_URL}/login`, { email, password });
     const token = response.data.data.auth_key;
     localStorage.setItem("token", token); // store the token in local storage
+   
     return response.data.data;
   } catch (error) {
     console.error(error);
@@ -85,6 +86,23 @@ export const getUsersList = async () => {
 };
 
 export const getUsers = async () => {
+  try {
+    const token = localStorage.getItem("token"); // retrieve the token from local storage
+    console.log(token);
+    const response = await axios.get(`${BASE_URL}/user_reputation`, {
+      headers: {
+        Authorization: `${token}`, // set the Authorization header with the token value
+      },
+    });
+    console.log(response.status);
+    return response.data.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+
+export const getAdmins = async () => {
   try {
     const token = localStorage.getItem("token"); // retrieve the token from local storage
     console.log(token);
