@@ -96,6 +96,16 @@ app.get('/workers/:id', async (req, res) => {
 
 });
 
+app.get('/workers', async (req, res) => {
+
+    const id = req.params.id;
+
+    const controller = await dbQuery('SELECT * FROM workers');
+
+    res.status(200).json({ "stauts": "success", "data": controller });
+
+});
+
 app.get('/user_reputation', async (req, res) => {
 
     var reputation = await dbQuery('SELECT * FROM user_reputation');
