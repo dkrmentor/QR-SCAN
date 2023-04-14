@@ -7,7 +7,7 @@ import Dashboard from "./components/Dashboard.js";
 import Login from "./components/Auth/Login";
 import Layout from "./Layout";
 import AddUser from "./components/Users/addUser";
-import './assets/Style/app.css'
+import './assets/Style/app.css';
 import UserNotification from "./components/Users/UserNotification";
 
 
