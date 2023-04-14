@@ -128,9 +128,7 @@ app.post('/login', async (req, res) => {
     const password = req.body.password;
 
     var user = await dbQuery('SELECT * FROM user WHERE email = ? AND password = ?', [email, password]);
-
     if (user.length > 0) {
-
         const { password, ...userWithoutPassword } = user[0];
         res.status(200).json({ "stauts": "success", "data": userWithoutPassword });
     } else {
@@ -152,12 +150,8 @@ app.post('/register', async (req, res) => {
     } else {
         var authKey = await generateAuthKey();
         authKey = 'Bearer ' + authKey;
-        await dbQuery('INSERT INTO user (email,name,password,role_id,auth_key,create_time) VALUES (?,?,?,?,?,CURRENT_TIMESTAMP)', [email, username, pass, role, authKey]);
-
-        var user = await dbQuery('SELECT * FROM user WHERE email = ? AND password = ?', [email, pass]);
-        
+        var users = await dbQuery('INSERT INTO user (email,name,password,role_id,auth_key,create_time) VALUES (?,?,?,?,?,CURRENT_TIMESTAMP)', [email, username, pass, role, authKey]);
         const { password, ...userWithoutPassword } = user[0];
-
         res.status(200).json({ "stauts": "success", "data": userWithoutPassword });
     }
 });

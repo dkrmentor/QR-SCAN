@@ -15,10 +15,6 @@ export const AuthContext = createContext();
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn') || false);
 
-  useEffect(() => {
-    localStorage.setItem('isLoggedIn', isLoggedIn);
-  }, [isLoggedIn]);
-
   const handleLogin = (val) => {
     setIsLoggedIn(val);
   }
@@ -36,7 +32,7 @@ const App = () => {
           <Route path="*" element={<Navigate to="/" replace />} />
         )}
           {!isLoggedIn ? (
-            <Route path="/" element={<Navigate to="/login" replace />} />
+            <Route path="*" element={<Navigate to="/login" replace />} />
           ) : (
             <>
               <Route path="/" element={<Layout />}>
