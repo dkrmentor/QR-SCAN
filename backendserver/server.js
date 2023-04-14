@@ -100,7 +100,7 @@ app.get('/workers', async (req, res) => {
 
     const id = req.params.id;
 
-    const controller = await dbQuery('SELECT * FROM workers');
+    const controller = await dbQuery('SELECT workers.*, user.id, user.name, user.email, user.role_id FROM workers JOIN user ON workers.user_id = user.id');
 
     res.status(200).json({ "stauts": "success", "data": controller });
 
