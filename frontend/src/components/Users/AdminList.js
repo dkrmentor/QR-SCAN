@@ -3,8 +3,6 @@ import { getAdmins } from "../../api";
 import "../../assets/Style/listing.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faCheck,
-  faTimes,
   faArrowUp,
   faArrowDown,
 } from "@fortawesome/free-solid-svg-icons";
@@ -70,27 +68,18 @@ import {
               </span>
              
             </div>
-            <div className="user-list-cell position">Position</div>
-            <div className="user-list-cell site">Site</div>
-            <div className="user-list-cell card">Carte</div>
+            <div className="user-list-cell email">Email</div>
           </div>
           {sortedUsers.map((user) => (
             <div
               key={user.id}
               className="user-list-row user-list-body"
             >
-              <div className="user-list-cell fname">{user.first_name}</div>
+              <div className="user-list-cell fname">{user.name}</div>
               <div className="user-list-cell position">
-                {user.user_position}
+                {user.email}
               </div>
-              <div className="user-list-cell site">{user.site}</div>
-              <div className="user-list-cell card">
-                {user.identity_card === "yes" ? (
-                  <FontAwesomeIcon icon={faCheck} />
-                ) : (
-                  <FontAwesomeIcon icon={faTimes} />
-                )}
-              </div>
+              
             </div>
           ))}
         </div>

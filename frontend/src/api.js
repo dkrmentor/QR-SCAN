@@ -106,7 +106,7 @@ export const getAdmins = async () => {
   try {
     const token = localStorage.getItem("token"); // retrieve the token from local storage
     console.log(token);
-    const response = await axios.get(`${BASE_URL}/user_reputation`, {
+    const response = await axios.get(`${BASE_URL}/workers`, {
       headers: {
         Authorization: `${token}`, // set the Authorization header with the token value
       },
