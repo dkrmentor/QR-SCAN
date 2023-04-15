@@ -1,13 +1,13 @@
 import axios from "axios";
 
-const BASE_URL = "http://192.168.1.113:4000";
+const BASE_URL = "http://192.168.100.4:4000";
 
 export const postLogin = async (email, password) => {
   try {
     const response = await axios.post(`${BASE_URL}/login`, { email, password });
     const token = response.data.data.auth_key;
     localStorage.setItem("token", token); // store the token in local storage
-   
+
     return response.data.data;
   } catch (error) {
     console.error(error);
@@ -23,7 +23,7 @@ export const postRegister = async (username, email, password, role_id) => {
       username,
       role_id,
     });
-  
+
     return response.data.data;
   } catch (error) {
     console.error(error);
@@ -31,9 +31,9 @@ export const postRegister = async (username, email, password, role_id) => {
   }
 };
 export const postWorker = async (name, user_id, controller_id) => {
-  console.log("token")
+
   const token = localStorage.getItem("token"); // retrieve the token from local storage
-  console.log(token);
+
   try {
     const response = await axios.post(
       `${BASE_URL}/worker`,
@@ -44,9 +44,6 @@ export const postWorker = async (name, user_id, controller_id) => {
         },
       }
     );
-
-    console.log("working");
-    console.log(response.status);
 
     return response.data.data;
   } catch (error) {
@@ -101,17 +98,51 @@ export const getUsers = async () => {
   }
 };
 
+export const getSingleUsers = async () => {
+  try {
+    const token = localStorage.getItem("token"); // retrieve the token from local storage
+    const userId = localStorage.getItem("user_id")
+
+    const response = await axios.get(`${BASE_URL}/user_reputation/${userId}`, {
+      headers: {
+        Authorization: `${token}`, // set the Authorization header with the token value
+      },
+    });
+
+    return response.data.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 
 export const getAdmins = async () => {
   try {
     const token = localStorage.getItem("token"); // retrieve the token from local storage
-    console.log(token);
+
     const response = await axios.get(`${BASE_URL}/workers`, {
       headers: {
         Authorization: `${token}`, // set the Authorization header with the token value
       },
     });
-    console.log(response.status);
+
+    return response.data.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const getSingleWorker = async () => {
+
+  try {
+    const token = localStorage.getItem("token"); // retrieve the token from local storage
+    const userId = localStorage.getItem("user_id");
+    const response = await axios.get(`${BASE_URL}/workers/${userId}`, {
+      headers: {
+        Authorization: `${token}`, // set the Authorization header with the token value
+      },
+    });
+
     return response.data.data;
   } catch (error) {
     console.error(error);

@@ -90,7 +90,7 @@ app.get('/workers/:id', async (req, res) => {
 
     const id = req.params.id;
 
-    const controller = await dbQuery('SELECT * FROM workers WHERE controller_id = ?', [id]);
+    const controller = await dbQuery('SELECT w.id, w.create_time, w.user_id, u.name, w.controller_id, u.email, u.role_id FROM workers w INNER JOIN user u ON w.user_id = u.id WHERE w.controller_id = ?', [id]);
 
     res.status(200).json({ "stauts": "success", "data": controller });
 
@@ -120,14 +120,18 @@ app.get('/user_reputation', async (req, res) => {
 
 app.get('/user_reputation/:id', async (req, res) => {
 
-    const userId = req.user.id;
+    const id = req.params.id;
 
-    var reputation = await dbQuery('SELECT * FROM user_reputation WHERE user_id = ?', [userId]);
+    try {
+        var reputation = await dbQuery('SELECT * FROM user_reputation WHERE controller_id = ?', [id]);
 
-    if (reputation.length > 0) {
-        res.status(200).json({ "stauts": "success", "data": reputation });
-    } else {
-        res.status(401).json({ "stauts": "failed", "message": "Invalid user" });
+        if (reputation.length > 0) {
+            res.status(200).json({ "stauts": "success", "data": reputation });
+        } else {
+            res.status(200).json({ "stauts": "success", "data": [] });
+        }
+    } catch (error) {
+        res.status(401).json({ "status": "Failed", "message": "Invalid User" });
     }
 
 });
@@ -165,7 +169,7 @@ app.post('/register', async (req, res) => {
         await dbQuery('INSERT INTO user (email,name,password,role_id,auth_key,create_time) VALUES (?,?,?,?,?,CURRENT_TIMESTAMP)', [email, username, pass, role, authKey]);
 
         var user = await dbQuery('SELECT * FROM user WHERE email = ? AND password = ?', [email, pass]);
-        
+
         const { password, ...userWithoutPassword } = user[0];
 
         res.status(200).json({ "stauts": "success", "data": userWithoutPassword });
@@ -245,5 +249,5 @@ app.get('/getnotification', async (req, res) => {
 });
 $PORT = 4000;
 app.listen($PORT, () => {
-    console.log('Server listening on port '+$PORT);
+    console.log('Server listening on port ' + $PORT);
 }); 

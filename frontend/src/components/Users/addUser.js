@@ -143,12 +143,12 @@ const AddUser = () => {
             setRoleId(e.target.value);
           }}
         >
-          {role_id === "1" ? (
+          {role_id === "2" ? (
             <option value="1">travailleur</option>
           ) : (
             <>
-              <option value="2">Contrôleur</option>
-              <option value="1">travailleur</option>
+              <option value="1">Contrôleur</option>
+              <option value="2">travailleur</option>
             </>
           )}
         </select>

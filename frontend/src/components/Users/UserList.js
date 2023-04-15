@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getUsers } from "../../api";
+import { getUsers, getSingleUsers } from "../../api";
 import UserReputation from "./UserReputation";
 import "../../assets/Style/listing.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,15 +9,20 @@ import {
   faArrowUp,
   faArrowDown,
 } from "@fortawesome/free-solid-svg-icons";
- const UserList = () => {
+const UserList = () => {
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
   const [sortOrder, setSortOrder] = useState("asc");
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const data = await getUsers();
-      setUsers(data);
+      if (localStorage.getItem("role_id") === "1") {
+        const data = await getUsers();
+        setUsers(data);
+      } else {
+        const data = await getSingleUsers();
+        setUsers(data);
+      }
     };
     fetchUsers();
   }, []);
@@ -33,7 +38,7 @@ import {
   };
 
   const handleSortOrderChange = () => {
-    
+
     setSortOrder((sortOrder) => {
       if (sortOrder === "asc") {
         return "desc";
@@ -43,13 +48,13 @@ import {
     });
   };
 
-  const sortedUsers = users.sort((a, b) => {
-    if (sortOrder === "asc") {
+  const sortedUsers = users != null ? users.sort((a, b) => {
+    if (sortOrder != null && sortOrder === "asc") {
       return a.first_name.localeCompare(b.first_name);
     } else {
       return b.first_name.localeCompare(a.first_name);
     }
-  });
+  }) : null;
 
   return (
     <div className="user-list">
@@ -62,30 +67,28 @@ import {
             >
               Prénom{"  "}
               <span className="arrow-icons">
-              <FontAwesomeIcon
-                className={`arrow-icon ${
-                  sortOrder === "asc" ? "visible" : "hide"
-                } ${sortOrder === "asc" ? "unclickable" : ""}`}
-                icon={faArrowUp}
-                style={{ opacity: sortOrder === "asc" ? "1" : "0.5" }}
-                onClick={sortOrder === "asc" ? null : handleSortOrderChange}
-              />
-              <FontAwesomeIcon
-                className={`arrow-icon ${
-                  sortOrder === "asc" ? "hide" : "visible"
-                } ${sortOrder === "desc" ? "unclickable" : ""}`}
-                icon={faArrowDown}
-                style={{ opacity: sortOrder === "desc" ? "1" : "0.5" }}
-                onClick={sortOrder === "desc" ? null : handleSortOrderChange}
-              />
+                <FontAwesomeIcon
+                  className={`arrow-icon ${sortOrder != null && sortOrder === "asc" ? "visible" : "hide"
+                    } ${sortOrder === "asc" ? "unclickable" : ""}`}
+                  icon={faArrowUp}
+                  style={{ opacity: sortOrder != null && sortOrder === "asc" ? "1" : "0.5" }}
+                  onClick={sortOrder != null && sortOrder === "asc" ? null : handleSortOrderChange}
+                />
+                <FontAwesomeIcon
+                  className={`arrow-icon ${sortOrder != null && sortOrder === "asc" ? "hide" : "visible"
+                    } ${sortOrder != null && sortOrder === "desc" ? "unclickable" : ""}`}
+                  icon={faArrowDown}
+                  style={{ opacity: sortOrder != null && sortOrder === "desc" ? "1" : "0.5" }}
+                  onClick={sortOrder != null && sortOrder === "desc" ? null : handleSortOrderChange}
+                />
               </span>
-             
+
             </div>
             <div className="user-list-cell position">Position</div>
             <div className="user-list-cell site">Site</div>
             <div className="user-list-cell card">Carte</div>
           </div>
-          {sortedUsers.map((user) => (
+          {sortedUsers != null ? sortedUsers.map((user) => (
             <div
               key={user.id}
               className="user-list-row user-list-body"
@@ -104,7 +107,7 @@ import {
                 )}
               </div>
             </div>
-          ))}
+          )) : null}
         </div>
       )}
       {selectedUser && <UserReputation user={selectedUser} />}
