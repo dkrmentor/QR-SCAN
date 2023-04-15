@@ -35,13 +35,13 @@ const AdminList = () => {
     });
   };
 
-  const sortedUsers = users.sort((a, b) => {
+  const sortedUsers = users != null ? users.sort((a, b) => {
     if (sortOrder === "asc") {
       return a.name.localeCompare(b.name);
     } else {
       return b.name.localeCompare(a.name);
     }
-  });
+  }) : [];
 
   return (
     <div className="user-list">

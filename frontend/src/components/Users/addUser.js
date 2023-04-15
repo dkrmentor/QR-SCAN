@@ -144,11 +144,11 @@ const AddUser = () => {
           }}
         >
           {role_id === "2" ? (
-            <option value="1">travailleur</option>
+            <option value="3">travailleur</option>
           ) : (
             <>
-              <option value="1">Contrôleur</option>
-              <option value="2">travailleur</option>
+              <option value="2">Contrôleur</option>
+              <option value="3">travailleur</option>
             </>
           )}
         </select>
