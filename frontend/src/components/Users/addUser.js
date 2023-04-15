@@ -89,7 +89,7 @@ const AddUser = () => {
             .then(async (response) => {
               var controller_id = localStorage.getItem("user_id");
 
-              await postWorker(response.name, response.id, controller_id)
+              await postWorker( response.id, controller_id)
                 .then(() => {
                   toast.success("Utilisateur ajouté", { autoClose: 2000 });
                 })

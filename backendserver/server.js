@@ -63,11 +63,14 @@ app.use(Authorization);
 
 
 app.get('/users', async (req, res) => {
-
-    var user = await dbQuery('SELECT * FROM user JOIN role ON user.role_id = role.id');
-
+    var users = [];
+    var user = await dbQuery('SELECT * FROM user');
     if (user.length > 0) {
-        res.status(200).json({ "stauts": "success", "data": user });
+        user.forEach(element => {
+            const { password, ...userWithoutPassword } = element;
+            users.push(userWithoutPassword);
+        });
+        res.status(200).json({ "stauts": "success", "data": users });
     } else {
         res.status(401).json({ "stauts": "failed", "message": "Invalid user" });
     }
@@ -80,8 +83,8 @@ app.post('/worker', async (req, res) => {
     const user_id = req.body.user_id;
     const controller_id = req.body.controller_id;
 
-    await dbQuery('INSERT INTO workers (name, user_id, controller_id,create_time) VALUES (?, ?, ?,CURRENT_TIMESTAMP)', [name, user_id, controller_id]);
-
+    await dbQuery('INSERT INTO workers ( user_id, controller_id,create_time) VALUES ( ?, ?,CURRENT_TIMESTAMP)', [ user_id, controller_id]);
+    await dbQuery("UPDATE user SET controller_name = ?, controller_id = ? WHERE id = ?", [name, controller_id, user_id]);
     res.status(200).json({ "stauts": "success", "data": "Worker Add Successfully" });
 
 });
@@ -132,6 +135,20 @@ app.get('/user_reputation/:id', async (req, res) => {
         }
     } catch (error) {
         res.status(401).json({ "status": "Failed", "message": "Invalid User" });
+    }
+
+});
+
+app.get('/user_reputations/:id', async (req, res) => {
+
+    const userId = req.params.id;
+    
+    var reputation = await dbQuery('SELECT * FROM user_reputation WHERE user_id = ?', [userId]);
+
+    if (reputation.length > 0) {
+        res.status(200).json({ "stauts": "success", "data": reputation });
+    } else {
+        res.status(401).json({ "stauts": "failed", "message": "Invalid user" });
     }
 
 });
@@ -201,8 +218,9 @@ app.post('/form', async (req, res) => {
     const location = req.body['location'];
     const lat = req.body['user_lat'];
     const long = req.body['user_long'];
+    const controller_id = req.body['controller_id'];
 
-    var reputation = await dbQuery('INSERT INTO user_reputation (name,first_name,site,controller,date,time,identity_card,round_controller,cleanliness_workstation,storage_documents,electronic_paperhandrail,round_reports,dress_code,onsite_behaviour,punctuality,reactivity,observations,user_position,user_language,location,user_lat,user_long,create_time,user_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,CURRENT_TIMESTAMP,?)', [name, firstName, site, controller, date, time, identityCard, roundController, cleanlinessOfTheWorkstation, storageOfMaterialsAndDocuments, electronicAndOrPaperHandrail, roundReports, dressCode, onSiteBehaviour, punctuality, reactivity, observations, position, language, location, lat, long, req.user.id]);
+    var reputation = await dbQuery('INSERT INTO user_reputation (name,first_name,site,controller,date,time,identity_card,round_controller,cleanliness_workstation,storage_documents,electronic_paperhandrail,round_reports,dress_code,onsite_behaviour,punctuality,reactivity,observations,user_position,user_language,location,user_lat,user_long,create_time,user_id,controller_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,CURRENT_TIMESTAMP,?,?)', [name, firstName, site, controller, date, time, identityCard, roundController, cleanlinessOfTheWorkstation, storageOfMaterialsAndDocuments, electronicAndOrPaperHandrail, roundReports, dressCode, onSiteBehaviour, punctuality, reactivity, observations, position, language, location, lat, long, req.user.id,controller_id]);
 
     var reputationData = await dbQuery('SELECT * FROM user_reputation WHERE id = ?', reputation.insertId);
 

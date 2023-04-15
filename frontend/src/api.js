@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://192.168.100.4:4000";
+const BASE_URL = "http://192.168.100.14:4000";
 
 export const postLogin = async (email, password) => {
   try {
@@ -16,12 +16,13 @@ export const postLogin = async (email, password) => {
 };
 
 export const postRegister = async (username, email, password, role_id) => {
+
   try {
     const response = await axios.post(`${BASE_URL}/register`, {
       email,
       password,
       username,
-      role_id,
+      role_id
     });
 
     return response.data.data;
@@ -30,9 +31,10 @@ export const postRegister = async (username, email, password, role_id) => {
     return null;
   }
 };
-export const postWorker = async (name, user_id, controller_id) => {
+export const postWorker = async (user_id, controller_id) => {
 
   const token = localStorage.getItem("token"); // retrieve the token from local storage
+  const name = localStorage.getItem("user_name");
 
   try {
     const response = await axios.post(
@@ -99,9 +101,11 @@ export const getUsers = async () => {
 };
 
 export const getSingleUsers = async () => {
+  console.log("works");
   try {
     const token = localStorage.getItem("token"); // retrieve the token from local storage
     const userId = localStorage.getItem("user_id")
+    console.log(token);
 
     const response = await axios.get(`${BASE_URL}/user_reputation/${userId}`, {
       headers: {

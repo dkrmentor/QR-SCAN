@@ -22,12 +22,10 @@ const Login = () => {
   };
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-
+    event.preventDefault(); 
     try {
-      
       const user = await postLogin(email, password);
-      console.log("works");      
+      console.log(user);
       if (user && (user.role_id === '2' || user.role_id === '1')) {
 
         toast.success("Connexion réussie", { autoClose: 2000, });
@@ -35,6 +33,7 @@ const Login = () => {
         // save user.role_id in local storage 
         localStorage.setItem('role_id', user.role_id);
         localStorage.setItem('user_id', user.id);
+        localStorage.setItem('user_name', user.name);
         
         handleLogin(true);
         
