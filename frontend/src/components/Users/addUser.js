@@ -63,7 +63,7 @@ const AddUser = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [roleId, setRoleId] = useState(1);
+  const [roleId, setRoleId] = useState(2);
   const [role_id, setRole_Id] = useState(0);
 
   useEffect(() => {
@@ -87,8 +87,11 @@ const AddUser = () => {
           setIsLoading(true);
           await postRegister(username, email, password, roleId)
             .then(async (response) => {
-              var controller_id = localStorage.getItem("user_id");
+              console.log(username, email, password, roleId)
 
+              console.log(response);
+              var controller_id = localStorage.getItem("user_id");
+              console.log(roleId);
               await postWorker( response.id, controller_id)
                 .then(() => {
                   toast.success("Utilisateur ajouté", { autoClose: 2000 });
@@ -135,12 +138,13 @@ const AddUser = () => {
         />
          <label htmlFor="role">Sélectionner un rôle:</label>
                         
-        <select
+        {/* <select
           value={roleId}
           id="role"
           name="role"
           onChange={(e) => {
             setRoleId(e.target.value);
+            console.log(e.target.value);
           }}
         >
           {role_id === "2" ? (
@@ -151,7 +155,19 @@ const AddUser = () => {
               <option value="3">travailleur</option>
             </>
           )}
-        </select>
+        </select> */}
+
+<div>
+  {role_id === "2" ? (
+    <span onClick={() => setRoleId("3")}>travailleur</span>
+  ) : (
+    <>
+      <span onClick={() => setRoleId("2")}>Contrôleur</span>
+    </>
+  )}
+</div>
+
+        
                         
         <InputValidation
           name="password"

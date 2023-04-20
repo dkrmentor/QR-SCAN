@@ -5,7 +5,7 @@ export const GoogleMaps = ({ lat, lng }) => {
   return (
     <div className="App">
       <iframe
-        width="600"
+        width="500"
         height="240"
         style={{ border: 0 }}
         src={url}

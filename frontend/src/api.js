@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://192.168.100.14:4000";
+const BASE_URL = "http://192.168.0.130:4000";
 
 export const postLogin = async (email, password) => {
   try {
@@ -24,7 +24,7 @@ export const postRegister = async (username, email, password, role_id) => {
       username,
       role_id
     });
-
+    console.log(response.data.data);
     return response.data.data;
   } catch (error) {
     console.error(error);

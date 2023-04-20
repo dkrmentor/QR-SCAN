@@ -99,14 +99,14 @@
 
 .user-info .condition-questions .condition-equipment {
   width: 40%;
-  background-color: #FFECEC;
+  background-color: #F3F3F3;
   margin: 5px;
   padding: 20px;
 }
 
 .user-info .condition-questions .condition-Workstation {
   width: 60%;
-  background-color: #FFECEC;
+  background-color: #F3F3F3;
   margin: 5px;
   padding: 20px;
 }
@@ -118,7 +118,7 @@
 }
 
 .user-info .performance-questions {
-  background-color: #FFECEC;
+  background-color: #F3F3F3;
   margin: 5px;
   padding: 20px;
 }
@@ -140,7 +140,7 @@
 
 .user-info .operational-questions .Operating-documents {
   width: 60%;
-  background-color: #FFECEC;
+  background-color: #F3F3F3;
   margin: 5px;
   padding: 20px;
 }
@@ -171,3 +171,10 @@
 
   margin-bottom: 0px !important;
 }
+
+
+/* @media print {
+  .user-info .option input[type="radio"]:disabled:checked+label:before {
+  background-color: #042C68 !important;
+  }
+  } */
