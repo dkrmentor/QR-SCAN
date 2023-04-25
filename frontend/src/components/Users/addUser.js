@@ -46,7 +46,7 @@ const InputValidation = ({
   };
   return (
     <>
-      <label htmlFor={name}>{label}:</label>             
+      <label htmlFor={name}>{label}:</label>
       <input
         type={type}
         value={value}
@@ -55,9 +55,9 @@ const InputValidation = ({
         onChange={handleInputChange}
         autoComplete='new-password'
       />
-                  
+                      
       {errorMessage && <span className="error-message">{errorMessage}</span>}
-              
+                      
     </>
   );
 };
@@ -71,7 +71,7 @@ const AddUser = () => {
 
   useEffect(() => {
     setRoleId(localStorage.getItem("role_id"));
-  },[]);
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -87,15 +87,22 @@ const AddUser = () => {
           toast.error("Mot de passe requis", { autoClose: 2000 });
           return;
         } else {
+          var newUserRole = "";
           setIsLoading(true);
-          await postRegister(username, email, password, roleId)
+          if (roleId === "1") {
+            newUserRole = "2";
+          } else {
+            newUserRole = "3";
+          }
+
+          await postRegister(username, email, password, newUserRole)
             .then(async (response) => {
-              console.log(username, email, password, roleId)
+              console.log(username, email, password, newUserRole)
 
               console.log(response);
               var controller_id = localStorage.getItem("user_id");
-              console.log(roleId);
-              await postWorker( response.id, controller_id)
+              console.log(newUserRole);
+              await postWorker(response.id, controller_id)
                 .then(() => {
                   toast.success("Utilisateur ajouté", { autoClose: 2000 });
                 })
@@ -117,9 +124,9 @@ const AddUser = () => {
 
   return (
     <div className="add-user">
-                  
+                      
       <form>
-                        
+                      
         <InputValidation
           name="username"
           label="Nom d'utilisateur"
@@ -139,7 +146,7 @@ const AddUser = () => {
           onChange={(e) => setEmail(e.target.value)}
           required
         />
-         <label htmlFor="role">Sélectionner un rôle:</label>
+        <label htmlFor="role">Sélectionner un rôle:</label>
                         
         {/* <select
           value={roleId}
@@ -160,17 +167,17 @@ const AddUser = () => {
           )}
         </select> */}
 
-<div>
-  {roleId === "2" ? (
-    <span onClick={() => setRoleId("3")}>travailleur</span>
-  ) : (
-    <>
-      <span onClick={() => setRoleId("2")}>Contrôleur</span>
-    </>
-  )}
-</div>
+        <div>
+          {roleId === "2" ? (
+            <span onClick={() => setRoleId("3")}>travailleur</span>
+          ) : (
+            <>
+              <span onClick={() => setRoleId("2")}>Contrôleur</span>
+            </>
+          )}
+        </div>
 
-        
+
                         
         <InputValidation
           name="password"
@@ -182,16 +189,16 @@ const AddUser = () => {
           minLength={6}
           pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$"
         />
-                    
+                
       </form>
-                  
+                      
       <button className="button" onClick={handleSubmit} disabled={isLoading}>
         {" "}
         {isLoading ? <LoadingSpinner /> : "Soumettre"}
       </button>
-                  
+
       <ToastContainer />
-              
+
     </div>
   );
 };
