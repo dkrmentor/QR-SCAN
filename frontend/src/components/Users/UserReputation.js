@@ -5,6 +5,7 @@ import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { GoogleMaps } from "../common/GoogleMaps";
 import { Question } from "../common/Question";
+import Print from "../common/print";
 
 const UserReputation = ({ user }) => {
   const [roundController, setRoundController] = useState(user.round_controller);
@@ -148,6 +149,9 @@ const UserReputation = ({ user }) => {
           <h2 className="question-heading">Observation</h2>
           <p>Observations de l'utilisateur: {user.observations}</p>
         </div>
+      </div>
+      <div className="nav__icons">
+        <Print />
       </div>
     </div>
   );

@@ -9,7 +9,7 @@ import {
   faArrowUp,
   faArrowDown,
 } from "@fortawesome/free-solid-svg-icons";
-import Print from "../common/print";
+
 
 const UserList = () => {
   const [users, setUsers] = useState([]);
@@ -113,9 +113,7 @@ const UserList = () => {
         </div>
       )}
       {selectedUser && <UserReputation user={selectedUser} />}
-      <div className="nav__icons">
-        <Print />
-      </div>
+      
     </div>
   );
 };
