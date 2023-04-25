@@ -5,6 +5,9 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingSpinner from "../common/loading_spinner";
 
+
+
+
 const InputValidation = ({
   value,
   name,
@@ -50,6 +53,7 @@ const InputValidation = ({
         id={name}
         name={name}
         onChange={handleInputChange}
+        autoComplete='new-password'
       />
                   
       {errorMessage && <span className="error-message">{errorMessage}</span>}
@@ -63,12 +67,11 @@ const AddUser = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [roleId, setRoleId] = useState(2);
-  const [role_id, setRole_Id] = useState(0);
+  const [roleId, setRoleId] = useState(0);
 
   useEffect(() => {
-    setRole_Id(localStorage.getItem("role_id"));
-  });
+    setRoleId(localStorage.getItem("role_id"));
+  },[]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -158,7 +161,7 @@ const AddUser = () => {
         </select> */}
 
 <div>
-  {role_id === "2" ? (
+  {roleId === "2" ? (
     <span onClick={() => setRoleId("3")}>travailleur</span>
   ) : (
     <>
