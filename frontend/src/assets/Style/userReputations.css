@@ -67,11 +67,18 @@
   border: 1px solid #042C68;
 }
 
-.user-info .option input[type="radio"]:disabled:checked+label:before {
-  /* Use the same styles for the radio button when it's selected */
+.user-info .option input[type="radio"]:disabled:checked[value="Excellent"]+label:before,
+.user-info .option input[type="radio"]:disabled:checked[value="Correct"]+label:before {
+  /* Apply blue color for "Excellent" and "Correct" options */
   background-color: #042C68;
-
 }
+
+.user-info .option input[type="radio"]:disabled:checked[value="Insuffisant"]+label:before,
+.user-info .option input[type="radio"]:disabled:checked[value="Inacceptable"]+label:before {
+  /* Apply red color for "Insuffisant" and "Inacceptable" options */
+  background-color: #C81212;
+}
+
 
 .user-info .condition-questions {
   display: flex;

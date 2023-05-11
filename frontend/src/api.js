@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://192.168.0.136:4000";
+const BASE_URL = "http://192.168.0.130:4000";
 
 export const postLogin = async (email, password) => {
   try {
