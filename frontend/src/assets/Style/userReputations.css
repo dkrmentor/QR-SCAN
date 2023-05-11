@@ -1,58 +1,61 @@
-.user-info{
+.user-info {
   padding: 10px;
 }
 
-.user-reputation {
+.user-info .user-reputation {
   background: #F3F3F3;
   margin: 10px;
   border-radius: 10px;
   padding: 5px 30px;
 }
 
-.user-question {
+.user-info .user-question {
   margin: 10px;
 }
 
-.user{
+.user-info .user {
   display: flex;
   flex-direction: row;
   align-items: center;
 
 
 }
-.user .profile-identity{
+
+.user-info .user .profile-identity {
   width: 40%;
 
 }
-.user .profile-info{
+
+.user-info .user .profile-info {
   width: 60%;
   display: flex;
   justify-content: space-around;
 }
-.user-cell .user-profile,
-.user-cell .user-card {
+
+.user-info .user-cell .user-profile,
+.user-info .user-cell .user-card {
   display: flex;
   align-items: center;
 }
 
-.user-cell .identity-info {
+.user-info .user-cell .identity-info {
   padding: 0px 10px;
 }
 
 
-.option input[type="radio"]:disabled + label {
+.user-info .option input[type="radio"]:disabled+label {
   /* Use the same styles for the label as if it were enabled */
   color: #333;
   cursor: not-allowed;
 }
 
-.option input[type="radio"]:disabled {
+.user-info .option input[type="radio"]:disabled {
   /* Hide the radio button, but keep its space */
   opacity: 0;
   position: absolute;
 }
 
-.option input[type="radio"]:disabled + label:before {
+.user-info .option input[type="radio"]:disabled+label:before {
   /* Use the same styles for the radio button as if it were enabled */
   content: "";
   display: inline-block;
@@ -64,63 +67,70 @@
   border: 1px solid #042C68;
 }
 
-.option input[type="radio"]:disabled:checked + label:before {
+.user-info .option input[type="radio"]:disabled:checked+label:before {
   /* Use the same styles for the radio button when it's selected */
   background-color: #042C68;
 
 }
 
-.condition-questions {
+.user-info .condition-questions {
   display: flex;
   flex-direction: row;
 }
-.user-question .question-heading {
+
+.user-info .user-question .question-heading {
   font-weight: 700;
   font-size: 20px;
   line-height: 25px;
   color: #042C68;
   margin: 0;
 }
-.user-question .question .question-name {
+
+.user-info .user-question .question .question-name {
 
   font-size: 18px;
   line-height: 25px;
 
 }
-.user-question .option{
+
+.user-info .user-question .option {
   margin: 10px 0px;
 }
-.condition-questions .condition-equipment {
+
+.user-info .condition-questions .condition-equipment {
   width: 40%;
-  background-color: #FFECEC;
-margin: 5px;
-padding: 20px;
+  background-color: #F3F3F3;
+  margin: 5px;
+  padding: 20px;
 }
 
-.condition-questions .condition-Workstation {
+.user-info .condition-questions .condition-Workstation {
   width: 60%;
-  background-color: #FFECEC;
-margin: 5px;
-padding: 20px;
+  background-color: #F3F3F3;
+  margin: 5px;
+  padding: 20px;
 }
-.condition-questions .condition-Workstation .cleanlinessandstorage{
+
+.user-info .condition-questions .condition-Workstation .cleanlinessandstorage {
   display: flex;
   justify-content: space-between;
   width: 80%;
 }
-.performance-questions{
-background-color: #FFECEC;
-margin: 5px;
-padding: 20px;
+
+.user-info .performance-questions {
+  background-color: #F3F3F3;
+  margin: 5px;
+  padding: 20px;
 }
 
-.performance-questions .attitudes-performance-attire{
+.user-info .performance-questions .attitudes-performance-attire {
   display: flex;
   justify-content: space-between;
   width: 90%;
 
 }
-.operational-questions {
+
+.user-info .operational-questions {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -128,28 +138,43 @@ padding: 20px;
 }
 
 
-.operational-questions .Operating-documents {
+.user-info .operational-questions .Operating-documents {
   width: 60%;
-  background-color: #FFECEC;
-margin: 5px;
-padding: 20px;  
+  background-color: #F3F3F3;
+  margin: 5px;
+  padding: 20px;
 }
-.operational-questions .Operating-documents .electronicandreport{
+
+.user-info .operational-questions .Operating-documents .electronicandreport {
   display: flex;
   justify-content: space-between;
   width: 70%;
 }
 
-.operational-questions .map {
+.user-info .operational-questions .map {
   width: 40%;
 
 }
 
-.observation{
+.user-info .observation {
   background-color: #F3F3F3;
   margin: 5px;
   padding: 20px;
-  }
-  .profile-info .user-cell .font-bold {
-    font-weight: bold;
 }
+
+.user-info .profile-info .user-cell span {
+  font-weight: bold;
+}
+
+
+.user-info  .user-list h1 {
+
+  margin-bottom: 0px !important;
+}
+
+
+/* @media print {
+  .user-info .option input[type="radio"]:disabled:checked+label:before {
+  background-color: #042C68 !important;
+  }
+  } */

@@ -1,5 +1,5 @@
 export function Question({ label, value, onChange }) {
-  const options = ["Excellent", "Correct", "Insufficient", "Unacceptable"];
+  const options = ["Excellent", "Correct", "Insuffisant", "Inacceptable"];
 
   return (
     <div className="question">
