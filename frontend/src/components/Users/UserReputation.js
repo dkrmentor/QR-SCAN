@@ -129,12 +129,12 @@ const UserReputation = ({ user }) => {
 
             <div className="electronicandreport">
               <Question
-                label="1. Rampe électronique et/ou papier"
+                label="1. Main carante électronique et/ou papier"
                 value={electronicPaperhandrail}
                 onChange={setElectronicPaperhandrail}
               />
               <Question
-                label="2. Rapports de ronde"
+                label="2. Rapport de ronde"
                 value={roundReports}
                 onChange={setRoundReports}
               />
