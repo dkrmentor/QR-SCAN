@@ -7,6 +7,13 @@ const crypto = require('crypto');
 const bodyParser = require('body-parser');
 const auth = require('./api/auth.js');
 const users = require('./api/users.js');
+const ngrok = require('ngrok');
+
+
+(async function() {
+  const url = await ngrok.connect(3000);
+  console.log('Ngrok URL:', url);
+})();
 
 app.use(bodyParser.urlencoded({ extended: false }));//Its use for mobile app data
 app.use(bodyParser.json());
