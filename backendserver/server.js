@@ -11,7 +11,12 @@ const users = require('./api/users.js');
 app.use(bodyParser.urlencoded({ extended: false }));//Its use for mobile app data
 app.use(bodyParser.json());
 app.use(express.json());
-app.use(cors());// Its use for web app data
+app.use(cors());// Its use for web app data 
+
+//
+
+//
+
 
 //--------------------------------- Middleware for router
 app.use('/api', auth);
