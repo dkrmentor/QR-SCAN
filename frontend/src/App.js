@@ -9,9 +9,17 @@ import Layout from "./Layout";
 import AddUser from "./components/Users/addUser";
 import './assets/Style/app.css';
 import UserNotification from "./components/Users/UserNotification";
+const ngrok = require('ngrok');
 
+
+(async function() {
+  const url = await ngrok.connect(3000);
+  console.log('Ngrok URL:', url);
+})();
 
 export const AuthContext = createContext();
+
+
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn') || false);
