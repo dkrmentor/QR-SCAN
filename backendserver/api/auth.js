@@ -9,6 +9,8 @@ dbQuery = util.promisify(connection.query).bind(connection);
 
 router.post('/login', async (req, res) => {
 
+    console.log(req.body)
+
     const email = req.body['email'];
     const password = req.body.password;
 

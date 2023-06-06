@@ -13,11 +13,6 @@ app.use(bodyParser.json());
 app.use(express.json());
 app.use(cors());// Its use for web app data 
 
-//
-
-//
-
-
 //--------------------------------- Middleware for router
 app.use('/api', auth);
 app.use('/api', users);//just like that we have to make notification also
