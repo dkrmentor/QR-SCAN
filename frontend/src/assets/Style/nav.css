@@ -3,7 +3,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 20px 20px;
-    background: #F3F3F3;
+    background: #ededed;
     margin-left: 200px; /* set margin-left to the width of the Sidebar component */
   }
   
@@ -23,7 +23,7 @@
   .nav__icons {
     display: flex;
     align-items: center;
-    color: #2A5298;
+    color: #232323;
 
   }
   .nav__icons:hover {

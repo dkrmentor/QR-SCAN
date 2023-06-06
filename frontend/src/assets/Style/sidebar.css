@@ -1,5 +1,5 @@
 .sidebar {
-  background: linear-gradient(to bottom, #042C68, #0E4D92);
+  background: #232323;
   width: 200px;
   height: 100%;
   position: fixed;
@@ -41,7 +41,7 @@
 }
 
 .nav-menu-items:hover {
-  background-color: #2A5298;
+  background-color: #232323;
   cursor: pointer;
   border-radius: 10px;
 }
